@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import GetCurrency
+from .views import Currency
 
 urlpatterns = [
-    path('', GetCurrency.as_view()),
+    path('', Currency.as_view()),
 ]
