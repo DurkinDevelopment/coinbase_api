@@ -1,6 +1,8 @@
+from django.views import View
 from django.shortcuts import render
 from django.http import JsonResponse
 import json
+from .models import SpotPrice
 
 # This function is used to retrieve the currency information from the coinbase api based on the tag
 class GetCurrency(View):
