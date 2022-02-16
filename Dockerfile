@@ -10,9 +10,6 @@ ENV PYTHONUNBUFFERED 1
 COPY requirements.txt requirements.txt 
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Cleanup files to not clutter the final image
-RUN rm requirement.txt
-
 # Mounts the application code to the image
 COPY . /app
 WORKDIR /app
