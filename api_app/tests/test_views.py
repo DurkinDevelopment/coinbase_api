@@ -1,25 +1,57 @@
 import pytest
+import json
 from django.urls import reverse
+from rest_framework.test import APIClient
+from api_app.views import Currency, Service
 
-class Test_Currency_View
+
+class TestCurrencyView:
     @pytest.mark.django_db
-    def test_get_currency_spot_price_usd(cient):
-        url = reverse('get_currency_spot_price', kwargs={'currency-pair':'USD'})
-        response = cient.get(url)
+    def test_get_currency_spot_price_usd(self):
+        client = APIClient()
+        url = reverse('get_currency_spot_price', args=['USD'])
+        response = client.get(url, format=json)
         assert response.status_code == 200
-        assert len(response.data) > 1
-    def test_get_currency_spot_price_eur(cient):
-        url = reverse('get_currency_spot_price', kwargs={'currency-pair':'EUR'})
-        response = cient.get(url)
+        assert len(response.data.data) > 1
+
+    @pytest.mark.django_db
+    def test_get_currency_spot_price_eur(api_client):
+        client = APIClient()
+        url = reverse('get_currency_spot_price', args=['EUR'])
+        response = client.get(url, format=json)
         assert response.status_code == 200
-        assert len(response.data) > 1
-    def test_get_currency_spot_price_gbp(cient):
-        url = reverse('get_currency_spot_price', kwargs={'currency-pair':'GBP'})
-        response = cient.get(url)
+        assert len(response.data.data) > 1
+        
+    @pytest.mark.django_db
+    def test_get_currency_spot_price_gbp(api_client):
+        client = APIClient()
+        url = reverse('get_currency_spot_price', args=['GBP'])
+        response = client.get(url, format=json)
         assert response.status_code == 200
-        assert len(response.data) > 1
-    def test_get_currency_spot_price_jpy(cient):
-        url = reverse('get_currency_spot_price', kwargs={'currency-pair':'JPY'})
-        response = cient.get(url)
+        assert len(response.data.data) > 1
+
+    @pytest.mark.django_db
+    def test_get_currency_spot_price_jpy(api_client):
+        client = APIClient()
+        url = reverse('get_currency_spot_price', args=['JPY'])
+        response = client.get(url, format=json)
         assert response.status_code == 200
-        assert len(response.data) > 1
+        assert len(response.data.data) > 1
+
+    @pytest.mark.django_db
+    def test_get_currency_spot_invalid_pair(client):
+        client = APIClient()
+        url = reverse('get_currency_spot_price', args=['USDF'])
+        response = client.get(url, format=json)
+        assert response.status_code == 400
+        
+
+class TestServiceView:
+    @pytest.mark.django_db
+    def test_get_health(self):
+        client = APIClient()
+        url = reverse('get_health')
+        response = client.get('/health', format='json')
+        print(response)
+        assert response.status_code == 200
+        assert response.data["isHealthy"] == "true"
