@@ -25,8 +25,20 @@ class Currency(APIView):
     def get_currency_spot_price(request, currency_pair):
         # TODO: Create a new get_currency_spot_price_request for auditing
         # Use the coinbase api wrapper function for making a get spot price request
-        get_spot_price_response = CoinbaseAPI.get_spot_price(currency_pair)
-        return Response(get_spot_price_response, status=status.HTTP_200_OK)
+        try:
+            get_spot_price_response = CoinbaseAPI.get_spot_price(currency_pair)
+            return Response(get_spot_price_response, status=status.HTTP_200_OK)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST) 
+
+class Service(APIView):
+    @api_view(('GET',))
+    @csrf_exempt
+    def get_health(request):
+        data = {
+            "isHealthy": "true",
+        }
+        return Response(data, status=status.HTTP_200_OK) 
 
 # TODO: This can be abstracted out into it's own file
 # This class if used for any wrapper functions needed for interacting with the coinbase api
