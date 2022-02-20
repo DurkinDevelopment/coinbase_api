@@ -4,12 +4,14 @@ certifi==2021.10.8
 charset-normalizer==2.0.12
 coinbase==2.1.0
 Django==3.2.12
+django-heartbeat==2.0.3
 djangorestframework==3.13.1
 idna==3.3
 importlib-metadata==4.11.1
 iniconfig==1.1.1
 packaging==21.3
 pluggy==1.0.0
+psutil==5.7.0
 py==1.11.0
 pycryptodome==3.14.1
 pyparsing==3.0.7
