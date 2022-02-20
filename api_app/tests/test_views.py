@@ -52,7 +52,6 @@ class TestServiceView:
         client = APIClient()
         url = reverse('get_health')
         response = client.get(url, format='json')
-        print(response)
         assert response.status_code == 200
         assert response.data["isHealthy"] == "true"
 

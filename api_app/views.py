@@ -49,7 +49,6 @@ class Service(APIView):
             "isHealthy": "true",
         }
         return Response(data, status=status.HTTP_200_OK) 
-
     # Credit for the data object isntatiation goes to https://github.com/pbs/django-heartbeat/blob/master/src/heartbeat/checkers/host.py
     @api_view(('GET',))
     @csrf_exempt
@@ -74,6 +73,7 @@ class Service(APIView):
             }
         }
         return Response(data, status=status.HTTP_200_OK)
+
 
 # TODO: This can be abstracted out into it's own file
 # This class if used for any wrapper functions needed for interacting with the coinbase api
