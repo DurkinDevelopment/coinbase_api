@@ -61,6 +61,6 @@ class TestServiceView:
         client = APIClient()
         url = reverse('get_metrics')
         response = client.get(url, format='json')
-        print(response)
+        data = response.data
         assert response.status_code == 200
-        assert response.data["isWorking"] == "true"
+        assert 'cpus' in data
