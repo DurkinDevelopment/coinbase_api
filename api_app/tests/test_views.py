@@ -51,7 +51,15 @@ class TestServiceView:
     def test_get_health(self):
         client = APIClient()
         url = reverse('get_health')
-        response = client.get('/health', format='json')
-        print(response)
+        response = client.get(url, format='json')
         assert response.status_code == 200
         assert response.data["isHealthy"] == "true"
+
+    @pytest.mark.django_db
+    def test_get_metrics(self):
+        client = APIClient()
+        url = reverse('get_metrics')
+        response = client.get(url, format='json')
+        data = response.data
+        assert response.status_code == 200
+        assert 'cpus' in data
