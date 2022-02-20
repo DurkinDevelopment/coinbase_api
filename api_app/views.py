@@ -40,6 +40,14 @@ class Service(APIView):
         }
         return Response(data, status=status.HTTP_200_OK) 
 
+    @api_view(('GET',))
+    @csrf_exempt
+    def get_metrics(request):
+        data = {
+            "isWorking": "true",
+        }
+        return Response(data, status=status.HTTP_200_OK)
+
 # TODO: This can be abstracted out into it's own file
 # This class if used for any wrapper functions needed for interacting with the coinbase api
 class CoinbaseAPI:
