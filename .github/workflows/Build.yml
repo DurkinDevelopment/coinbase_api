@@ -35,4 +35,4 @@ jobs:
       - name: Check running containers
         run: docker ps -a
       - name: Check logs
-        run: docker logs coinbase_api_web
+        run: docker logs coinbase_api_web_1
